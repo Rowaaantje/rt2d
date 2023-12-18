@@ -10,6 +10,7 @@
 #include <rt2d/scene.h>
 #include "shape.h"
 
+
 class MyScene : public Scene
 {
 public:
