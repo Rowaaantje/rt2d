@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required (VERSION 2.8.12)
+cmake_minimum_required (VERSION 3.5)
 project (rt2d)
 
 # delete CMakeCache.txt from the build directory when you edit these options
@@ -160,6 +160,8 @@ IF(MAKE_START)
 		start/myscene.h
 		start/enemy.cpp
 		start/enemy.h
+		start/potion.cpp
+		start/potion.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

@@ -6,6 +6,7 @@
 class Enemy: public Entity
 {
 public:
+
 	Enemy();
 	virtual ~Enemy();
 	void Mv(Vector2 vector);

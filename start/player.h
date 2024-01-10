@@ -5,7 +5,6 @@
 
 #include <rt2d/entity.h>
 
-
 /// @brief The Player class is the Entity implementation.
 class Player : public Entity
 {
@@ -13,8 +12,13 @@ public:
 	/// @brief Constructor
 	Player();
 	/// @brief Destructor
+
+	Vector2 velocity;
 	virtual ~Player();
 	void Mv(Vector2 vector);
+	void Movement(float deltaTime, int switchInt);
+	void HandlePlayer(float deltaTime);
+
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds

@@ -20,8 +20,8 @@ void Enemy::Mv(Vector2 vector)
  this->position += vector;
 }
 
-
 void Enemy::update(float deltaTime)
 {
 	
 }
+

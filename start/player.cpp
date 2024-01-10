@@ -4,6 +4,7 @@
 #include "player.h"
 
 
+
 Player::Player() : Entity()
 {
 	this->addSprite("assets/square.tga");
@@ -23,13 +24,35 @@ void Player::Mv(Vector2 vector)
 
 void Player::update(float deltaTime)
 {
-	// ###############################################################
-	// Rotate
-	// ###############################################################
-	// this->rotation.z += HALF_PI * deltaTime; // 90 deg/sec
-	// if (this->rotation.z > TWO_PI) {
-	// 	this->rotation.z -= TWO_PI;
-	// }
+	HandlePlayer(deltaTime);
 }
 
+void Player::Movement(float deltaTime, int switchInt)
+{
+	switch (switchInt)
+	{
+	case 1:
+		this->velocity.y = -1;
+	break;
 
+	case 2:
+		this->velocity.y += 1;
+	break;
+
+	case 3:
+		this->velocity.x += -1;
+	break;
+	
+	case 4:
+		this->velocity.x += 1;
+	break;
+	}
+}
+
+void Player::HandlePlayer(float deltaTime)
+{
+	this->velocity.normalize();
+	this->velocity *= 1000 * deltaTime;
+	this->position += this->velocity;
+	this->velocity *= 0;
+}
