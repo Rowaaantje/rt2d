@@ -5,7 +5,7 @@
 
 
 
-Player::Player() : Entity()
+Player::Player() : Dentity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = GREEN;
@@ -25,6 +25,7 @@ void Player::Mv(Vector2 vector)
 void Player::update(float deltaTime)
 {
 	HandlePlayer(deltaTime);
+	this->isInfected = false;
 }
 
 void Player::Movement(float deltaTime, int switchInt)
@@ -52,7 +53,7 @@ void Player::Movement(float deltaTime, int switchInt)
 void Player::HandlePlayer(float deltaTime)
 {
 	this->velocity.normalize();
-	this->velocity *= 1000 * deltaTime;
+	this->velocity *= 250 * deltaTime;
 	this->position += this->velocity;
 	this->velocity *= 0;
 }

@@ -15,20 +15,20 @@ MyScene::MyScene() : Scene()
 	// the Sprite is added in Constructor of MyEntity.
 	player1 = new Player();
 	player2 = new Player();
-	enemy = new Enemy();
+	enemy1 = new Enemy();
 	potion = new Potion();
 
 	player2->position = Point2(SWIDTH/2, SHEIGHT/2);
 	player1->position = Point2(SWIDTH/2, SHEIGHT/2.2);
 
-	enemy->position = Point2(SWIDTH/1.5, SHEIGHT/2);
+	enemy1->position = Point2(SWIDTH/1.5, SHEIGHT/2);
 	potion->position = Point2(SWIDTH/1.7, SHEIGHT/2);
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(player1);
 	this->addChild(player2);
-	this->addChild(enemy);
+	this->addChild(enemy1);
 	this->addChild(potion);
 
 	Velocity;
@@ -55,27 +55,36 @@ void MyScene::update(float deltaTime)
 	drawLine();
 
 
-
-	if (infect(player2))
-	{
-		player2->sprite()->color = RED;
-	}
-	
+if (enemy->isInfected || player2->isInfected)	
+{
 	if (infect(player1))
 	{
 		player1->sprite()->color = RED;
+		player1->isInfected = true;
+		std::cout << player1->isInfected << std::endl;
 	}
+}
+
+if (enemy->isInfected || player1->isInfected )
+{
+	if (infect(player2))
+	{
+		player2->sprite()->color = RED;
+		player2->isInfected = true;
+		std::cout << player2->isInfected << std::endl;
+	}
+}
 
 	if (pot(player1))
 	{
 		player1->sprite()->color = GREEN;
-
+		player1->isInfected = false;
 	}
 	
 	if (pot(player2))
 	{
 		player2->sprite()->color = GREEN;
-
+		player2->isInfected = false;
 	}
 
 	// Forces(deltaTime);
@@ -113,10 +122,11 @@ void MyScene::forces(float deltaTime){
 
 bool MyScene::infect(Player *player){
 
+
 return (enemy->position.x  < player->position.x + player->sprite()->size.x * player->scale.x &&
-		enemy->position.x + enemy->sprite()->size.x * enemy->scale.x > player->position.x &&
+		enemy->position.x + enemy1->sprite()->size.x * enemy->scale.x > player->position.x &&
 		enemy->position.y < player->position.y + player->sprite()->size.y * player->scale.y &&
-		enemy->position.y + enemy->sprite()->size.y * enemy->scale.y > player->position.y);
+		enemy->position.y + enemy1->sprite()->size.y * enemy->scale.y > player->position.y);
 
 }
 

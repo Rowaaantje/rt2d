@@ -20,10 +20,6 @@ public:
 	int walk = 500;
 	int sprint = 1000;
 
-	bool isInfected;
-
-
-
 
 	Vector2 Velocity;//Point2
 	Vector2 Acceleration;//Point2
@@ -46,7 +42,10 @@ private:
 	/// @brief the rotating square in the middle of the screen
 	Player* player1;
 	Player* player2;
+	
+	Enemy* enemy1;
 	Enemy* enemy;
+
 	Potion* potion;
 	/// @brief a Timer to rotate the color every n seconds
 	

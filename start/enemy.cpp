@@ -3,7 +3,7 @@
 
 #include "enemy.h"
 
-Enemy::Enemy() : Entity()
+Enemy::Enemy() : Dentity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = RED;
@@ -22,6 +22,6 @@ void Enemy::Mv(Vector2 vector)
 
 void Enemy::update(float deltaTime)
 {
-	
+	this->isInfected = true;
 }
 

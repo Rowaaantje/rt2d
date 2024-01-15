@@ -154,6 +154,8 @@ file(
 IF(MAKE_START)
 	add_executable(start
 		start/main.cpp
+		start/dentity.cpp
+		start/dentity.h
 		start/player.cpp
 		start/player.h
 		start/myscene.cpp

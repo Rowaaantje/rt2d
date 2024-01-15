@@ -3,10 +3,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <rt2d/entity.h>
+#include <start/dentity.h>
+
+// #include <rt2d/entity.h>
+
+
 
 /// @brief The Player class is the Entity implementation.
-class Player : public Entity
+class Player : public Dentity
 {
 public:
 	/// @brief Constructor
