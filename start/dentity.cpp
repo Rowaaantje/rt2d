@@ -21,7 +21,4 @@ void Dentity::update(float deltaTime)
    
 }
 
-void Dentity::okay()
-{
-    
-}
+

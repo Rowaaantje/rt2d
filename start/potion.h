@@ -11,6 +11,12 @@ public:
 	Potion();
 	virtual ~Potion();
 
+	int randomX;
+	int randomY;
+	
+	void RandomizePotion(float deltaTime);
+
+
 private:
 	/* add your private declarations */
 

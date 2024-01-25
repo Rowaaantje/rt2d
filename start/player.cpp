@@ -3,13 +3,13 @@
 
 #include "player.h"
 
-
-
 Player::Player() : Dentity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = GREEN;
 	this->scale += Point(-0.75, -0.75);
+	this->isInfected = false;
+	// this->position = Vector2(rand() % SWIDTH, rand() % SHEIGHT);
 }
 
 Player::~Player()
@@ -25,7 +25,6 @@ void Player::Mv(Vector2 vector)
 void Player::update(float deltaTime)
 {
 	HandlePlayer(deltaTime);
-	this->isInfected = false;
 }
 
 void Player::Movement(float deltaTime, int switchInt)
@@ -33,7 +32,7 @@ void Player::Movement(float deltaTime, int switchInt)
 	switch (switchInt)
 	{
 	case 1:
-		this->velocity.y = -1;
+		this->velocity.y += -1;
 	break;
 
 	case 2:
@@ -57,3 +56,4 @@ void Player::HandlePlayer(float deltaTime)
 	this->position += this->velocity;
 	this->velocity *= 0;
 }
+

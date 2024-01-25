@@ -18,7 +18,7 @@ public:
 
 
     void update(float deltaTime);
-	void Dentity::okay();
+	
 
 private:
 	/* add your private declarations */
