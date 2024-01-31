@@ -25,6 +25,10 @@ public:
 	int walk = 500;
 	int sprint = 1000;
 
+	int totalEnemiesSpawned = 0;
+	int spawnCount = 0;
+	float timeSpawn = 1;
+
 	// int randomX;
 	// int randomY;
 
@@ -32,7 +36,6 @@ public:
 	Vector2 Acceleration;//Point2
 	int mass; 
     std::vector<Enemy*> enemies;
-
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -45,20 +48,23 @@ public:
 	void movement(float deltaTime);
 	void drawLine();
 	bool collision(Entity *playerA , Entity *playerB);
-	void playerRot();
+	void playerMouseRot();
+	void hell();
+	void CamPlayer(float deltaTime);
+
+	Point3 _p1Pos;
+	Vector2 _p1Rot;
 
 
 private:
-	/// @brief the rotating square in the middle of the screen
 	Player* player1;
 	Player* player2;
-	
-	// Enemy* enemy;
-	// std::vector<Enemy*> enemies;
+
+	/// @brief work progres
+	Camera* player1Cam; 
 	Potion* potion;
-	/// @brief a Timer to rotate the color every n seconds
 	
-	// Timer t; kleur
+	// Timer t; color
 };
 
 #endif /* SCENE00_H */

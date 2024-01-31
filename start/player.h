@@ -18,8 +18,6 @@ public:
 	void Movement(float deltaTime, int switchInt);
 	void HandlePlayer(float deltaTime);
 
-	int randomX;
-	int randomY;
 	void RandomizePlayer();
 	
 	/// @brief update is automatically called every frame

@@ -10,9 +10,6 @@ MyScene::MyScene() : Scene()
 {
 	// start the timer.
 	// t.start(); kleur
-
-	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
 	player1 = new Player();
 	player2 = new Player();
 	potion = new Potion();
@@ -21,17 +18,20 @@ MyScene::MyScene() : Scene()
 	player1->position = Point2(SWIDTH / 2.2, SHEIGHT / 2.2);
 	player2->position = Point2(SWIDTH / 1.8, SHEIGHT / 2.2);
 
+	player1Cam = new Camera();
+
 	// create the scene 'tree'
 	this->addChild(player1);
 	this->addChild(player2);
 	this->addChild(potion);
 
-	for (size_t i = 0; i < 5; i++)
+
+	for (size_t i = 0; i < 4; i++)
 	{
 		enemies.push_back(new Enemy(player1, player2));
 		this->addChild(enemies[i]);
-		enemies[i]->position = Vector2(rand() % SWIDTH, rand() % SHEIGHT);
 	}
+	
 	
 	Velocity;
 	Acceleration;
@@ -46,9 +46,9 @@ MyScene::~MyScene()
 	this->removeChild(player2);
 	this->removeChild(potion);
 
-	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete player1;
 	delete player2;
+	delete player1Cam;
 	
 	// delete enemies;
 	for (size_t i = 0; i < enemies.size(); i++)
@@ -60,10 +60,12 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
-	playerRot();
 	quit();
+	hell();
 	movement(deltaTime);
-	drawLine();
+	CamPlayer(deltaTime);
+
+	// drawLine();
 
 	for (size_t i = 0; i < enemies.size(); i++)
 	{
@@ -111,7 +113,6 @@ void MyScene::update(float deltaTime)
 		player2->isInfected = false;
 		std::cout << "player2 = human" << std::endl;
 		potion->RandomizePotion(deltaTime);
-
 	}
 	// Forces(deltaTime);
 	// Move(deltaTime);
@@ -144,7 +145,6 @@ void MyScene::forces(float deltaTime)
 {
 
 	Vector2 wind(150.0f, 0.0f);
-
 	addForce(wind);
 }
 
@@ -267,16 +267,45 @@ void MyScene::drawLine()
 	// ddLine(enemy->position.x, enemy->position.y, mx, my, RED);
 }
 
-void MyScene::playerRot()
+void MyScene::hell()
 {
-	// Sensitivity factor for rotation
-	float sensitivity = 0.1f;
+	bool yes = false;
+	if(input()->getKey(KeyCode::Alpha1))
+	{
+		for (size_t i = 0; i < spawnCount; i++)
+		{
+			enemies.push_back(new Enemy(player1, player2));
+			this->addChild(enemies[i]);
+			// enemies[i]->position = Vector2(rand() % SWIDTH, rand() % SHEIGHT);
+			yes = true;
+		}
+		spawnCount++; // increment the spawn count each time enemies are spawned
+		std::cout << spawnCount << std::endl;
+	}
 
-	float mx = input()->getMouseX();
-	float my = input()->getMouseY();
-
-	Vector2 mouseLocation = Vector2(mx, my) - player1->position;
-	player1->rotation.z = mouseLocation.getAngle();
+	if(input()->getKeyDown(KeyCode::Alpha2))
+	{
+		for (size_t i = 0; i < spawnCount; i++)
+		{
+			enemies.push_back(new Enemy(player1, player2));
+			this->addChild(enemies[i]);
+			// enemies[i]->position = Vector2(rand() % SWIDTH, rand() % SHEIGHT);
+			yes = true;
+		}
+		spawnCount++; // increment the spawn count each time enemies are spawned
+		std::cout << spawnCount << std::endl;
+	}
+	
+	
 }
-//cos cin
 
+void MyScene::CamPlayer(float deltaTime) //camera follow the player 
+{
+	player1Cam->position =  _p1Pos;
+
+	_p1Pos = player1->position;
+
+	// if(_p1Pos)
+
+	std::cout << _p1Pos << std::endl;
+}
